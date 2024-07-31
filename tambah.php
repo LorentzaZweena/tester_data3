@@ -15,14 +15,21 @@
 if (isset($_POST['Kasir'])) {
     $nama_kasir = $_POST['Kasir'];
     $status = $_POST['status'];
+    $payment = $_POST['payment'];
     $no_hp = $_POST['no_hp'];
-    $id_kamar = $_POST['id_kamar'];
-    $cekin = $_POST['cekin'];
-    $cekout = $_POST['cekout'];
-    $jumlah = $_POST['jumlah'];
-    $total = $_POST['total'];
+    $customer = $_POST['Customer'];
+    $alamat = $_POST['Alamat'];
+    $kota = $_POST['Kota'];
+    $sumber = $_POST['Sumber'];
+    $item_produk = $_POST['produk_item'];
+    $qty = $_POST['QTY'];
+    $discount = $_POST['Discount'];
+    $price_per_item = $_POST['harga_per_item'];
+    $delivery = $_POST['delivery'];
+    $packing = $_POST['packing'];
+    $total = $_POST['grand_total'];
 
-    $sql = "INSERT INTO `sistem_kasir` (`id_sistem`, `Kasir`, `status`, `cekout`, `no_identitas`, `no_hp`, `id_admin`, `jumlah`, `total`) VALUES ('".$id_kamar."', '".$nama."', '".$cekin."', '".$cekout."', '".$no_identitas."', '".$no_hp."', '".$_SESSION['id_admin']."', '".$jumlah."', '".$total."')";
+    $sql = "INSERT INTO `sistem_kasir` (`Kasir`, `status`, `payment`, `no_hp`, `id_kasir`, `id_status`, `id_payment`, `id_kota`, `id_sumber`, `Customer`, `Alamat`, `Kota`, `Sumber`, `produk_item`, `QTY`, `Discount`, `harga_per_item`, `delivery`, `packing`, `grand_total`) VALUES ('".$nama_kasir."', '".$status."', '".$payment."', '".$no_hp."', '".$customer."', '".$alamat."', '".$_SESSION['id_kasir']."', '".$kota."', '".$sumber."', '".$item_produk."','".$qty."', '".$discount."', '".$price_per_item."', '".$delivery."', '".$packing."', '".$total."')";
 
     mysqli_query($db, $sql);
     header("location:sistem_kasir.php");
@@ -69,22 +76,39 @@ if (isset($_POST['Kasir'])) {
   <thead>
     <tr class="table-primary">
       <th scope="col">No</th>
-      <th scope="col">Nama lengkap</th>
-      <th scope="col">No identitas</th>
-      <th scope="col">No hp</th>
-      <th scope="col">Jenis kamar</th>
-      <th scope="col">Check in</th>
-      <th scope="col">Check out</th>
-      <th scope="col">Jumlah kamar</th>
+      <th scope="col">Nama kasir</th>
+      <th scope="col">Status</th>
+      <th scope="col">Payment</th>
+      <th scope="col">Nomor HP</th>
+      <th scope="col">Nama customer</th>
+      <th scope="col">Alamat</th>
+      <th scope="col">Kota</th>
+      <th scope="col">Sumber</th>
+      <th scope="col">Item produk</th>
+      <th scope="col">QTY</th>
+      <th scope="col">Discount</th>
+      <th scope="col">Price / item</th>
+      <th scope="col">Delivery</th>
+      <th scope="col">Packing</th>
       <th scope="col">Total</th>
-      <th scope="col" colspan="2">Action</th>
+      <!-- <th scope="col" colspan="2">Action</th> -->
     </tr>
   </thead>
   <tbody>
     <tr>
         <td>1</td>
-        <td><input type="text" name="nama"></td>
-        <td><input type="text" name="no_identitas"></td>
+        <td><input type="text" name="Kasir"></td>
+        <td>
+                <select name="id_status" id="status">
+                <?php
+                    $sql = "SELECT * FROM statusnya";
+                    $query = mysqli_query($db, $sql);
+                    while($status = mysqli_fetch_array($query)){
+                        echo "<option value=".$status['id_status'].$status['status']."</option>";
+                    }
+                    ?>
+                </select>
+            </td>
         <td><input type="text" name="no_hp"></td>
         <td>
                 <select name="id_kamar" id="jenis_kamar">

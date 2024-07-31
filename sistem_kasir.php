@@ -77,14 +77,8 @@
   <?php 
             // $sql = "SELECT sistem_kasir.*  AS id_sistem_kasir, sistem_kasir.id_produk AS id_produk, sistem_kasir.id_kasir AS id_kasir,sistem_kasir.id_status AS id_status, sistem_kasir.id_payment AS id_payment, sistem_kasir.id_kota AS id_kota,sistem_kasir.id_sumber AS id_sumber,kasir.nama AS nama_kasir,statusnya.status AS status,payment.payment AS payment,kota.kota AS kota,sumber.sumber AS sumber,produk.nama_produk AS produk FROM sistem_kasir JOIN produk ON sistem_kasir.id_produk = produk.id_produk JOIN kasir ON sistem_kasir.id_kasir = kasir.id_kasir JOIN statusnya ON sistem_kasir.id_status = statusnya.id_status JOIN payment ON sistem_kasir.id_payment = payment.id_payment JOIN kota ON sistem_kasir.id_kota = kota.id_kota JOIN sumber ON sistem_kasir.id_sumber = sumber.id_sumber;";
 
-            $sql = "SELECT sistem_kasir.*, kasir.nama AS nama_kasir, statusnya.status AS status, payment.payment AS payment, kota.kota AS kota, sumber.sumber AS sumber, produk.nama_produk AS produk 
-                FROM sistem_kasir 
-                JOIN produk ON sistem_kasir.id_produk = produk.id_produk 
-                JOIN kasir ON sistem_kasir.id_kasir = kasir.id_kasir 
-                JOIN statusnya ON sistem_kasir.id_status = statusnya.id_status 
-                JOIN payment ON sistem_kasir.id_payment = payment.id_payment 
-                JOIN kota ON sistem_kasir.id_kota = kota.id_kota 
-                JOIN sumber ON sistem_kasir.id_sumber = sumber.id_sumber";
+            $sql = "SELECT sistem_kasir.*, kasir.nama AS nama_kasir, statusnya.status AS status, payment.payment AS payment, kota.kota AS kota, sumber.sumber AS sumber, produk.nama_produk AS produk FROM sistem_kasir JOIN produk ON sistem_kasir.id_produk = produk.id_produk JOIN kasir ON sistem_kasir.id_kasir = kasir.id_kasir JOIN statusnya ON sistem_kasir.id_status = statusnya.id_status JOIN payment ON sistem_kasir.id_payment = payment.id_payment JOIN kota ON sistem_kasir.id_kota = kota.id_kota JOIN sumber ON sistem_kasir.id_sumber = sumber.id_sumber";
+            
             $query = mysqli_query($db, $sql);
             $no = 1;
             function fetchOptions($db, $table, $idColumn, $nameColumn) {
