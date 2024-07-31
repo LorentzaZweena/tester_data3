@@ -36,7 +36,7 @@
   </button>
   <ul class="dropdown-menu mt-2">
     <li><a class="dropdown-item" href="kamar_read.php">Data produk</a></li>
-    <li><a class="dropdown-item" href="admin_read.php">Data kasir</a></li>
+    <li><a class="dropdown-item" href="kasir.php">Data kasir</a></li>
   </ul>
 </div>
   </div>
