@@ -97,34 +97,64 @@ if (isset($_POST['Kasir'])) {
   <tbody>
     <tr>
         <td>1</td>
-        <td><input type="text" name="Kasir"></td>
         <td>
-                <select name="id_status" id="status">
-                <?php
-                    $sql = "SELECT * FROM statusnya";
-                    $query = mysqli_query($db, $sql);
-                    while($status = mysqli_fetch_array($query)){
-                        echo "<option value=".$status['id_status'].$status['status']."</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-        <td><input type="text" name="no_hp"></td>
-        <td>
-                <select name="id_kamar" id="jenis_kamar">
-                <?php
-                    $sql = "SELECT * FROM tbl_jenis_kamar";
-                    $query = mysqli_query($db, $sql);
-                    while($kamar = mysqli_fetch_array($query)){
-                        echo "<option value=".$kamar['id_kamar']." data-harga='".$kamar['harga']."'>".$kamar['jenis_kamar']." - Rp ".$kamar['harga']."</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-            <td><input type="date" name="cekin" id="cekin"></td>
-            <td><input type="date" name="cekout" id="cekout"></td>
-            <td><input type="text" name="jumlah" id="jumlah_kamar"></td>
-            <td><input type="text" name="total" id="total_bayar"></td>
+          <select name="id_kasir" id="nama">
+              <?php
+                  $sql = "SELECT * FROM kasir";
+                  $query = mysqli_query($db, $sql);
+                  while($nama = mysqli_fetch_array($query)){
+                      echo "<option value='" . $nama['id_kasir'] . "'>" . $nama['nama'] . "</option>";
+                  }
+              ?>
+          </select>
+      </td>
+              <td>
+          <select name="id_status" id="status">
+              <?php
+                  $sql = "SELECT * FROM statusnya";
+                  $query = mysqli_query($db, $sql);
+                  while($status = mysqli_fetch_array($query)){
+                      echo "<option value='" . $status['id_status'] . "'>" . $status['status'] . "</option>";
+                  }
+              ?>
+          </select>
+      </td>
+      <td>
+          <select name="id_payment" id="payment">
+              <?php
+                  $sql = "SELECT * FROM payment";
+                  $query = mysqli_query($db, $sql);
+                  while($payment = mysqli_fetch_array($query)){
+                      echo "<option value='" . $payment['id_payment'] . "'>" . $payment['payment'] . "</option>";
+                  }
+              ?>
+          </select>
+      </td>
+      <td><input type="text" name="no_hp" id="no_hp"></td>
+      <td><input type="text" name="Customer" id="Customer"></td>
+      <td><input type="text" name="Alamat" id="Alamat"></td>
+      <td>
+          <select name="id_kota" id="kota">
+              <?php
+                  $sql = "SELECT * FROM kota";
+                  $query = mysqli_query($db, $sql);
+                  while($kota = mysqli_fetch_array($query)){
+                      echo "<option value='" . $kota['id_kota'] . "'>" . $kota['kota'] . "</option>";
+                  }
+              ?>
+          </select>
+      </td>
+      <td>
+          <select name="id_sumber" id="sumber">
+              <?php
+                  $sql = "SELECT * FROM sumber";
+                  $query = mysqli_query($db, $sql);
+                  while($sumber = mysqli_fetch_array($query)){
+                      echo "<option value='" . $sumber['id_sumber'] . "'>" . $sumber['sumber'] . "</option>";
+                  }
+              ?>
+          </select>
+      </td>
             <td>
                 <button type="button" id="btn_hitung" onclick=hitung()>Hitung Total Bayar</button>
             </td>
