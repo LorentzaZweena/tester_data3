@@ -87,7 +87,7 @@ if (isset($_POST['Kasir'])) {
       <th scope="col">Item produk</th>
       <th scope="col">QTY</th>
       <th scope="col">Discount</th>
-      <th scope="col">Price / item</th>
+      <!-- <th scope="col">Price / item</th> -->
       <th scope="col">Delivery</th>
       <th scope="col">Packing</th>
       <th scope="col">Total</th>
@@ -155,10 +155,19 @@ if (isset($_POST['Kasir'])) {
               ?>
           </select>
       </td>
-            <td>
-                <button type="button" id="btn_hitung" onclick=hitung()>Hitung Total Bayar</button>
+      <td>
+                <select name="id_produk" id="produk">
+                <?php
+                    $sql = "SELECT * FROM produk";
+                    $query = mysqli_query($db, $sql);
+                    while($produk = mysqli_fetch_array($query)){
+                        echo "<option value=".$produk['id_produk']." data-harga='".$produk['harga_jual']."'>".$produk['nama_produk']." - Rp ".$produk['harga_jual']."</option>";
+                    }
+                    ?>
+                </select>
             </td>
-            <td><input type="submit" value="Simpan Transaksi"></input></td>
+            <td><input type="number" name="QTY" id="QTY"></td>
+            <td><input type="text" name="Discount" id="Discount"></td>
     </tr>
     </form>
 </div>
