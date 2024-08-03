@@ -10,7 +10,7 @@
 
 <?php 
     include("config.php"); 
-    ?>
+?>
 <?php
 if (isset($_POST['Kasir'])) {
     $nama_kasir = $_POST['Kasir'];
@@ -24,12 +24,11 @@ if (isset($_POST['Kasir'])) {
     $item_produk = $_POST['produk_item'];
     $qty = $_POST['QTY'];
     $discount = $_POST['Discount'];
-    $price_per_item = $_POST['harga_per_item'];
     $delivery = $_POST['delivery'];
     $packing = $_POST['packing'];
-    $total = $_POST['grand_total'];
+    $total = $_POST['total'];
 
-    $sql = "INSERT INTO `sistem_kasir` (`Kasir`, `status`, `payment`, `no_hp`, `id_kasir`, `id_status`, `id_payment`, `id_kota`, `id_sumber`, `Customer`, `Alamat`, `Kota`, `Sumber`, `produk_item`, `QTY`, `Discount`, `harga_per_item`, `delivery`, `packing`, `grand_total`) VALUES ('".$nama_kasir."', '".$status."', '".$payment."', '".$no_hp."', '".$customer."', '".$alamat."', '".$_SESSION['id_kasir']."', '".$kota."', '".$sumber."', '".$item_produk."','".$qty."', '".$discount."', '".$price_per_item."', '".$delivery."', '".$packing."', '".$total."')";
+    $sql = "INSERT INTO `sistem_kasir` (`Kasir`, `status`, `payment`, `no_hp`, `id_kasir`, `id_status`, `id_payment`, `id_kota`, `id_sumber`, `Customer`, `Alamat`, `Kota`, `Sumber`, `produk_item`, `QTY`, `Discount`, `harga_per_item`, `delivery`, `packing`, `grand_total`) VALUES ('".$nama_kasir."', '".$status."', '".$payment."', '".$no_hp."', '".$customer."', '".$alamat."', '".$_SESSION['id_kasir']."', '".$kota."', '".$sumber."', '".$item_produk."', '".$qty."', '".$discount."', '".$price_per_item."', '".$delivery."', '".$packing."', '".$total."')";
 
     mysqli_query($db, $sql);
     header("location:sistem_kasir.php");
@@ -41,179 +40,147 @@ if (isset($_POST['Kasir'])) {
 
     <!-- navigasi untuk mengakses data kamar dan data lainnya -->
     <div class="d-flex flex-row ms-n2">
-  <div class="p-2">
-  <div class="dropdown">
-  <button class="btn btn-light border border-secondary dropdown-toggle dropdown-toggle-split rounded-0 ms-5 mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    All table
-  </button>
-  <ul class="dropdown-menu mt-2">
-    <li><a class="dropdown-item" href="sistem_kasir.php">Sistem kasir</a></li>
-    <li><a class="dropdown-item" href="kasir.php">Data kasir</a></li>
-  </ul>
-</div>
-  </div>
-  <div class="p-2">
-    <nav class="navbar bg-transparent">
-  <!-- <div class="container-fluid bg-transparent">
-    <form class="d-flex bg-transparent rounded-0" role="search">
-      <input class="form-control me-2 rounded-0" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success rounded-0" type="submit">Search</button>
-    </form>
-  </div> -->
-</nav>
-</div>
-  <div class="p-2">
-    <div class="buat-logout">
-    <a class="btn btn-light border border-black rounded-0 mt-2" href="logout.php" role="button" style="width: 100%;">Logout</a>
+        <div class="p-2">
+            <div class="dropdown">
+                <button class="btn btn-light border border-secondary dropdown-toggle dropdown-toggle-split rounded-0 ms-5 mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    All table
+                </button>
+                <ul class="dropdown-menu mt-2">
+                    <li><a class="dropdown-item" href="sistem_kasir.php">Sistem kasir</a></li>
+                    <li><a class="dropdown-item" href="kasir.php">Data kasir</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="p-2">
+            <nav class="navbar bg-transparent"></nav>
+        </div>
+        <div class="p-2">
+            <div class="buat-logout">
+                <a class="btn btn-light border border-black rounded-0 mt-2" href="logout.php" role="button" style="width: 100%;">Logout</a>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-<hr>
-<div>
-    <!-- <h3 class="ms-5">Form Pemesanan</h3> -->
-    <form method="POST">
-    <table class="table ms-1" style="width: 90%">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">No</th>
-      <th scope="col">Nama kasir</th>
-      <th scope="col">Status</th>
-      <th scope="col">Payment</th>
-      <th scope="col">Nomor HP</th>
-      <th scope="col">Nama customer</th>
-      <th scope="col">Alamat</th>
-      <th scope="col">Kota</th>
-      <th scope="col">Sumber</th>
-      <th scope="col">Item produk</th>
-      <th scope="col">QTY</th>
-      <th scope="col">Discount</th>
-      <!-- <th scope="col">Price / item</th> -->
-      <th scope="col">Delivery</th>
-      <th scope="col">Packing</th>
-      <th scope="col">Total</th>
-      <!-- <th scope="col" colspan="2">Action</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-        <td>1</td>
-        <td>
-          <select name="id_kasir" id="nama">
-              <?php
-                  $sql = "SELECT * FROM kasir";
-                  $query = mysqli_query($db, $sql);
-                  while($nama = mysqli_fetch_array($query)){
-                      echo "<option value='" . $nama['id_kasir'] . "'>" . $nama['nama'] . "</option>";
-                  }
-              ?>
-          </select>
-      </td>
-              <td>
-          <select name="id_status" id="status">
-              <?php
-                  $sql = "SELECT * FROM statusnya";
-                  $query = mysqli_query($db, $sql);
-                  while($status = mysqli_fetch_array($query)){
-                      echo "<option value='" . $status['id_status'] . "'>" . $status['status'] . "</option>";
-                  }
-              ?>
-          </select>
-      </td>
-      <td>
-          <select name="id_payment" id="payment">
-              <?php
-                  $sql = "SELECT * FROM payment";
-                  $query = mysqli_query($db, $sql);
-                  while($payment = mysqli_fetch_array($query)){
-                      echo "<option value='" . $payment['id_payment'] . "'>" . $payment['payment'] . "</option>";
-                  }
-              ?>
-          </select>
-      </td>
-      <td><input type="text" name="no_hp" id="no_hp"></td>
-      <td><input type="text" name="Customer" id="Customer"></td>
-      <td><input type="text" name="Alamat" id="Alamat"></td>
-      <td>
-          <select name="id_kota" id="kota">
-              <?php
-                  $sql = "SELECT * FROM kota";
-                  $query = mysqli_query($db, $sql);
-                  while($kota = mysqli_fetch_array($query)){
-                      echo "<option value='" . $kota['id_kota'] . "'>" . $kota['kota'] . "</option>";
-                  }
-              ?>
-          </select>
-      </td>
-      <td>
-          <select name="id_sumber" id="sumber">
-              <?php
-                  $sql = "SELECT * FROM sumber";
-                  $query = mysqli_query($db, $sql);
-                  while($sumber = mysqli_fetch_array($query)){
-                      echo "<option value='" . $sumber['id_sumber'] . "'>" . $sumber['sumber'] . "</option>";
-                  }
-              ?>
-          </select>
-      </td>
-      <td>
-                <select name="id_produk" id="produk">
-                <?php
-                    $sql = "SELECT * FROM produk";
-                    $query = mysqli_query($db, $sql);
-                    while($produk = mysqli_fetch_array($query)){
-                        echo "<option value=".$produk['id_produk']." data-harga='".$produk['harga_jual']."'>".$produk['nama_produk']." - Rp ".$produk['harga_jual']."</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-            <td><input type="text" name="QTY" id="QTY"></td>
-            <td><input type="text" name="Discount" id="Discount"></td>
-            <td><input type="text" name="Packing" id="Packing"></td>
-            <td><input type="text" name="produk" id="produk"></td>
-            <td><input type="text" name="total" id="total"></td>
-            <td><button type="button" id="btn_hitung" onclick="hitung()">Hitung Total Bayar</button></td>
-    </tr>
-    </form>
-</div>
+    <hr>
+    <div>
+        <form method="POST" id="kasir-form" action="sistem_kasir.php">
+            <table class="table ms-1" style="width: 90%">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">No</th>
+                        <th scope="col">Nama kasir</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Nomor HP</th>
+                        <th scope="col">Nama customer</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Kota</th>
+                        <th scope="col">Sumber</th>
+                        <th scope="col">Item produk</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Delivery</th>
+                        <th scope="col">Packing</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <select name="id_kasir" id="nama">
+                                <?php
+                                    $sql = "SELECT * FROM kasir";
+                                    $query = mysqli_query($db, $sql);
+                                    while($nama = mysqli_fetch_array($query)){
+                                        echo "<option value='" . $nama['id_kasir'] . "'>" . $nama['nama'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="id_status" id="status">
+                                <?php
+                                    $sql = "SELECT * FROM statusnya";
+                                    $query = mysqli_query($db, $sql);
+                                    while($status = mysqli_fetch_array($query)){
+                                        echo "<option value='" . $status['id_status'] . "'>" . $status['status'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="id_payment" id="payment">
+                                <?php
+                                    $sql = "SELECT * FROM payment";
+                                    $query = mysqli_query($db, $sql);
+                                    while($payment = mysqli_fetch_array($query)){
+                                        echo "<option value='" . $payment['id_payment'] . "'>" . $payment['payment'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td><input type="text" name="no_hp" id="no_hp"></td>
+                        <td><input type="text" name="Customer" id="Customer"></td>
+                        <td><input type="text" name="Alamat" id="Alamat"></td>
+                        <td>
+                            <select name="id_kota" id="kota">
+                                <?php
+                                    $sql = "SELECT * FROM kota";
+                                    $query = mysqli_query($db, $sql);
+                                    while($kota = mysqli_fetch_array($query)){
+                                        echo "<option value='" . $kota['id_kota'] . "'>" . $kota['kota'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="id_sumber" id="sumber">
+                                <?php
+                                    $sql = "SELECT * FROM sumber";
+                                    $query = mysqli_query($db, $sql);
+                                    while($sumber = mysqli_fetch_array($query)){
+                                        echo "<option value='" . $sumber['id_sumber'] . "'>" . $sumber['sumber'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="id_produk" id="produk">
+                                <?php
+                                    $sql = "SELECT * FROM produk";
+                                    $query = mysqli_query($db, $sql);
+                                    while($produk = mysqli_fetch_array($query)){
+                                        echo "<option value=".$produk['id_produk']." data-harga='".$produk['harga_jual']."'>".$produk['nama_produk']." - Rp ".$produk['harga_jual']."</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                        <td><input type="number" name="QTY" id="QTY"></td>
+                        <td><input type="text" name="Discount" id="Discount"></td>
+                        <td><input type="text" name="delivery" id="delivery"></td>
+                        <td><input type="text" name="packing" id="packing"></td>
+                        <td><input type="text" name="total" id="total"></td>
+                        <td><button type="button" id="btn_hitung" onclick="hitung()">Hitung Total Bayar</button></td>
+                        <td><input type="submit" value="Simpan data"></input></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 </body>
 <script>
     function hitung() {
-        // var QTY = new Number(document.getElementById("QTY").value);
-        // var Discount = new Number(document.getElementById("Discount").value);
-        // var Delivery = new Number(document.getElementById("delivery").value);
-        // var Packing = new Number(document.getElementById("packing").value);
-        // var produk = document.getElementById("produk");
-        // var harga = produk.options[produk.selectedIndex].dataset.harga;
-
-        // var total = QTY * harga * produk * durasi;
-
-
-        // if (Discount > 0) {
-        //     total = total / (1 + (Discount / 100));
-        // }
-
-        // total += Delivery + Packing;
-        // document.getElementById("total").value = total.toFixed(2);
-
-        function hitung() {
-            var QTY = new Number(document.getElementById("QTY").value);
-            var Discount = new Number(document.getElementById("Discount").value);
-            var Packing = new Number(document.getElementById("Packing").value);
-
-            var p = document.getElementById("produk");
-            var harga = p.options[p.selectedIndex].dataset.harga;
-
-            var discountPercentage = Discount / 100;
-            var hitung_discount = harga * (1 - discountPercentage);
-
-            if (hitung_discount == 0) {
-                hitung_discount = 1;
-            }
-
-            var total = (harga * QTY) / hitung_discount;
-            total += Packing;
-
-            document.getElementById("total").value = total.toFixed(2);
+        var QTY = new Number(document.getElementById("QTY").value);
+        var Discount = new Number(document.getElementById("Discount").value);
+        var Packing = new Number(document.getElementById("packing").value);
+        
+        var p = document.getElementById("produk");
+        var harga = p.options[p.selectedIndex].dataset.harga;
+        
+        document.getElementById("total").value = harga * QTY ; 
+        var hitung_discount = (harga * 1 - (Discount));
+        if (hitung_discount == 0) {
+            hitung_discount = 1;
         }
     }
 </script>
