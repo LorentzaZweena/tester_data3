@@ -166,24 +166,55 @@ if (isset($_POST['Kasir'])) {
                     ?>
                 </select>
             </td>
-            <td><input type="number" name="QTY" id="QTY"></td>
+            <td><input type="text" name="QTY" id="QTY"></td>
             <td><input type="text" name="Discount" id="Discount"></td>
+            <td><input type="text" name="Packing" id="Packing"></td>
+            <td><input type="text" name="produk" id="produk"></td>
+            <td><input type="text" name="total" id="total"></td>
+            <td><button type="button" id="btn_hitung" onclick="hitung()">Hitung Total Bayar</button></td>
     </tr>
     </form>
 </div>
 </body>
 <script>
-    function hitung(){
-        var cekin = new Date(document.getElementById("cekin").value);
-        var cekout = new Date(document.getElementById("cekout").value);
-        var durasi = (cekout.getTime() - cekin.getTime()) / (1000 * 60 * 60 * 24);
-        if (durasi == 0) {
-            durasi = 1;
+    function hitung() {
+        // var QTY = new Number(document.getElementById("QTY").value);
+        // var Discount = new Number(document.getElementById("Discount").value);
+        // var Delivery = new Number(document.getElementById("delivery").value);
+        // var Packing = new Number(document.getElementById("packing").value);
+        // var produk = document.getElementById("produk");
+        // var harga = produk.options[produk.selectedIndex].dataset.harga;
+
+        // var total = QTY * harga * produk * durasi;
+
+
+        // if (Discount > 0) {
+        //     total = total / (1 + (Discount / 100));
+        // }
+
+        // total += Delivery + Packing;
+        // document.getElementById("total").value = total.toFixed(2);
+
+        function hitung() {
+            var QTY = new Number(document.getElementById("QTY").value);
+            var Discount = new Number(document.getElementById("Discount").value);
+            var Packing = new Number(document.getElementById("Packing").value);
+
+            var p = document.getElementById("produk");
+            var harga = p.options[p.selectedIndex].dataset.harga;
+
+            var discountPercentage = Discount / 100;
+            var hitung_discount = harga * (1 - discountPercentage);
+
+            if (hitung_discount == 0) {
+                hitung_discount = 1;
+            }
+
+            var total = (harga * QTY) / hitung_discount;
+            total += Packing;
+
+            document.getElementById("total").value = total.toFixed(2);
         }
-        var jk = document.getElementById("jenis_kamar");
-        var harga = jk.options[jk.selectedIndex].dataset.harga;
-        var jumlah_kamar = document.getElementById("jumlah_kamar").value;
-        document.getElementById("total_bayar").value = harga * jumlah_kamar * durasi; 
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
