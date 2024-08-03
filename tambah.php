@@ -12,7 +12,7 @@
     include("config.php"); 
 ?>
 <?php
-if (isset($_POST['Kasir'])) {
+if (isset($_POST['submit'])) {
     $nama_kasir = $_POST['Kasir'];
     $status = $_POST['status'];
     $payment = $_POST['payment'];
@@ -161,7 +161,7 @@ if (isset($_POST['Kasir'])) {
                         <td><input type="text" name="packing" id="packing"></td>
                         <td><input type="text" name="total" id="total"></td>
                         <td><button type="button" id="btn_hitung" onclick="hitung()">Hitung Total Bayar</button></td>
-                        <td><input type="submit" value="Simpan data"></input></td>
+                        <td><input type="submit" value="Simpan data" name="submit"></input></td>
                     </tr>
                 </tbody>
             </table>
