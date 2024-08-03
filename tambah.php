@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                     <tr>
                         <td>1</td>
                         <td>
-                            <select name="id_kasir" id="nama">
+                            <select name="Kasir" id="nama">
                                 <?php
                                     $sql = "SELECT * FROM kasir";
                                     $query = mysqli_query($db, $sql);
@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
                         <td><input type="text" name="packing" id="packing"></td>
                         <td><input type="text" name="total" id="total"></td>
                         <td><button type="button" id="btn_hitung" onclick="hitung()">Hitung Total Bayar</button></td>
-                        <td><input type="submit" value="Simpan data" name="submit"></input></td>
+                        <td><button type="submit" value="Simpan data" name="submit">Simpan data</button></td>
                     </tr>
                 </tbody>
             </table>
