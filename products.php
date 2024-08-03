@@ -82,7 +82,6 @@
             <tbody>
             <?php 
                 $no = 1;
-                // query for finishing options
                 $finishingOptions = [];
                 $finishingQuery = "SELECT * FROM finishing";
                 $finishingResult = mysqli_query($db, $finishingQuery);
@@ -90,7 +89,6 @@
                     $finishingOptions[] = $finishingRow;
                 }
 
-                // query to fetch products
                 $sql = "SELECT * FROM produk";
                 $query = mysqli_query($db, $sql);
 

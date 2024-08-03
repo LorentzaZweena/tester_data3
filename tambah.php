@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Kasir</title>
+    <title>Sistem kasir</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -11,11 +11,35 @@
 <?php 
     include("config.php"); 
 ?>
+<?php
+if (isset($_POST['submit'])) {
+    $nama_kasir = $_POST['Kasir'];
+    $status = $_POST['id_status'];
+    $payment = $_POST['id_payment'];
+    $no_hp = $_POST['no_hp'];
+    $customer = $_POST['Customer'];
+    $alamat = $_POST['Alamat'];
+    $kota = $_POST['id_kota'];
+    $sumber = $_POST['id_sumber'];
+    $item_produk = $_POST['id_produk'];
+    $qty = $_POST['QTY'];
+    $discount = $_POST['Discount'];
+    $delivery = $_POST['delivery'];
+    $harga_per_item = $_POST['harga_per_item'];
+    $packing = $_POST['packing'];
+    $total = $_POST['total'];
 
-    <!-- Judul halaman -->
-    <h3 class="mt-5 ms-5">Sistem Kasir Form</h3>
+    $sql = mysqli_query($db, "INSERT INTO sistem_kasir (Kasir, statusnya, payment, no_hp, id_kasir, id_status, id_payment, id_kota, id_sumber, Customer, Alamat, Kota, Sumber, produk_item, QTY, Discount, harga_per_item, delivery, packing, grand_total) VALUES ('".$nama_kasir."', '".$status."', '".$payment."', '".$no_hp."', '".$customer."', '".$alamat."', '".$kota."', '".$sumber."', '".$item_produk."', '".$qty."', '".$discount."', '".$harga_per_item."', '".$delivery."', '".$packing."', '".$total."')");
 
-    <!-- Navigasi untuk mengakses data kamar dan data lainnya -->
+    // mysqli_query($db, $sql);
+    header("location:sistem_kasir.php");
+}
+
+?>
+    <!-- judul halaman -->
+    <h3 class="mt-5 ms-5">Sistem kasir form</h3>
+
+    <!-- navigasi untuk mengakses data kamar dan data lainnya -->
     <div class="d-flex flex-row ms-n2">
         <div class="p-2">
             <div class="dropdown">
@@ -23,9 +47,8 @@
                     All table
                 </button>
                 <ul class="dropdown-menu mt-2">
-                    <li><a class="dropdown-item" href="sistem_kasir.php">Sistem Kasir</a></li>
-                    <li><a class="dropdown-item" href="kasir.php">Data Kasir</a></li>
-                    <li><a class="dropdown-item" href="products.php">Data produk</a></li>
+                    <li><a class="dropdown-item" href="sistem_kasir.php">Sistem kasir</a></li>
+                    <li><a class="dropdown-item" href="kasir.php">Data kasir</a></li>
                 </ul>
             </div>
         </div>
@@ -40,23 +63,23 @@
     </div>
     <hr>
     <div>
-        <form method="POST" action="sistem_kasir.php" id="kasir-form">
+        <form method="POST" id="kasir-form" action="">
             <table class="table ms-1" style="width: 90%">
                 <thead>
                     <tr class="table-primary">
                         <th scope="col">No</th>
-                        <th scope="col">Nama Kasir</th>
+                        <th scope="col">Nama kasir</th>
                         <th scope="col">Status</th>
                         <th scope="col">Payment</th>
                         <th scope="col">Nomor HP</th>
-                        <th scope="col">Nama Customer</th>
+                        <th scope="col">Nama customer</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Kota</th>
                         <th scope="col">Sumber</th>
-                        <th scope="col">Item Produk</th>
+                        <th scope="col">Item produk</th>
                         <th scope="col">QTY</th>
                         <th scope="col">Discount</th>
-                        <th scope="col">Harga / Item</th>
+                        <th scope="col">Harga / item</th>
                         <th scope="col">Delivery</th>
                         <th scope="col">Packing</th>
                         <th scope="col">Total</th>
@@ -71,7 +94,7 @@
                                     $sql = "SELECT * FROM kasir";
                                     $query = mysqli_query($db, $sql);
                                     while($nama = mysqli_fetch_array($query)){
-                                        echo "<option value='" . $nama['id_kasir'] . "'>" . $nama['nama'] . "</option>";
+                                        echo "<option value='" . $nama['Kasir'] . "'>" . $nama['nama'] . "</option>";
                                     }
                                 ?>
                             </select>
@@ -129,7 +152,7 @@
                                     $sql = "SELECT * FROM produk";
                                     $query = mysqli_query($db, $sql);
                                     while($produk = mysqli_fetch_array($query)){
-                                        echo "<option value='".$produk['id_produk']."' data-harga='".$produk['harga_jual']."'>".$produk['nama_produk']." - Rp ".$produk['harga_jual']."</option>";
+                                        echo "<option value=".$produk['id_produk']." data-harga='".$produk['harga_jual']."'>".$produk['nama_produk']." - Rp ".$produk['harga_jual']."</option>";
                                     }
                                 ?>
                             </select>
@@ -157,7 +180,7 @@
         var p = document.getElementById("produk");
         var harga = p.options[p.selectedIndex].dataset.harga;
         
-        document.getElementById("total").value = harga * QTY ; 
+        document.getElementById("total").value = harga * QTY; 
         var hitung_discount = (harga * 1 - (Discount));
         if (hitung_discount == 0) {
             hitung_discount = 1;
